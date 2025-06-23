@@ -12,7 +12,7 @@ const russoOne = Russo_One({
 
 export default function Landing() {
   return (
-    <div className="flex flex-col md:flex-row items-center text-white px-6 md:p-10 md:mx-auto md:max-w-6xl">
+    <div className="flex flex-col md:flex-row items-center text-white px-6 md:p-10 md:mx-auto md:max-w-6xl gap-10">
       <div className="flex items-center justify-center md:hidden">
         <img src="/images/Nexus.png" alt="Landing Page" className="max-w-2/3" />
       </div>
