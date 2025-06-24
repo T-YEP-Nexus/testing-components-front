@@ -30,10 +30,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
         <BackgroundBubbles />
-        <div className="flex">
-          <Sidebar />
+        <Sidebar />
+        <main className="ml-20 md:ml-64 min-h-screen overflow-y-auto transition-all duration-300">
           {children}
-        </div>
+        </main>
       </body>
     </html>
   );

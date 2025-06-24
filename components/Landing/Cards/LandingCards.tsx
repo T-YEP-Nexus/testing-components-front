@@ -12,7 +12,7 @@ function LandingCards(props: {
   image: string;
 }) {
   return (
-    <div className="bg-white rounded-xl p-4 w-68 h-82 text-center shadow-lg shadow-black/20 lg:hover:shadow-xl transition-all duration-300 lg:hover:scale-105 select-none md:max-w-6xl">
+    <div className="bg-white rounded-xl p-4 w-68 md:w-68 h-72 md:h-82 text-center shadow-lg shadow-black/20 lg:hover:shadow-xl transition-all duration-300 lg:hover:scale-105 select-none md:max-w-6xl">
       <div className="flex flex-col items-center justify-center gap-4">
         <img
           src={props.image}
@@ -23,11 +23,11 @@ function LandingCards(props: {
           }}
         />
         <h3
-          className={`text-3xl font-bold text-[#0D3B8C] ${russoOne.className}`}
+          className={`text-xl md:text-3xl font-bold text-[#0D3B8C] ${russoOne.className}`}
         >
           {props.title}
         </h3>
-        <p className="text-md text-[#6B8CC2]">{props.description}</p>
+        <p className="text-sm md:text-md text-[#6B8CC2]">{props.description}</p>
       </div>
     </div>
   );
