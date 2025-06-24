@@ -27,11 +27,11 @@ export default function LandingHero() {
         <Link href="/login">
           <Button
             size="lg"
-            className="bg-[#1971FF] py-8 text-white group cursor-pointer md:hover:bg-[#1971FF]/70 transition-all duration-300 shadow-md shadow-black/20 text-xl font-bold hover:scale-102"
+            className="bg-[#1971FF] py-8 text-white group cursor-pointer lg:hover:bg-[#1971FF]/70 transition-all duration-300 shadow-md shadow-black/20 text-xl font-bold lg:hover:scale-102"
           >
             Accéder à mon espace
             <ArrowRight
-              className="-me-1 ms-2 transition-transform md:group-hover:translate-x-0.5"
+              className="-me-1 ms-2 transition-transform lg:group-hover:translate-x-0.5"
               size={16}
               strokeWidth={2}
               aria-hidden="true"
