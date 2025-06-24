@@ -28,7 +28,7 @@ const cards = [
     image: "/images/accès.png",
   },
   {
-    title: "Suivi de projet",
+    title: "Suivis de projets",
     description: "Gère et visualise l’avancement de tes projets étudiants",
     image: "/images/suivi.png",
   },
