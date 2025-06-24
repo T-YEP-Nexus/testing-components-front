@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Russo_One } from "next/font/google";
+import React, { useState } from "react";
+import Link from "next/link";
 
 const russoOne = Russo_One({
   subsets: ["latin"],
@@ -8,6 +10,9 @@ const russoOne = Russo_One({
 });
 
 export default function LandingHero() {
+  // State pour gérer le hover sur desktop
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="flex flex-col md:flex-row items-center text-white pt-20 md:mx-auto md:max-w-6xl gap-10 max-xl:px-10">
       <div className="flex items-center justify-center md:hidden">
@@ -28,30 +33,31 @@ export default function LandingHero() {
           Un seul outil pour tes projets, tes cours, tes rendus et bien plus
           encore.
         </p>
-        <Button
-          size="lg"
-          onClick={() => {
-            alert("Accéder à mon espace");
-          }}
-          className="bg-[#1971FF] py-8 text-white group cursor-pointer md:hover:bg-[#1971FF]/70 transition-all duration-300 shadow-md shadow-black/20 text-xl font-bold"
-        >
-          Accéder à mon espace
-          <ArrowRight
-            className="-me-1 ms-2 transition-transform md:group-hover:translate-x-0.5"
-            size={16}
-            strokeWidth={2}
-            aria-hidden="true"
-          />
-        </Button>
+        <Link href="/login">
+          <Button
+            size="lg"
+            className="bg-[#1971FF] py-8 text-white group cursor-pointer md:hover:bg-[#1971FF]/70 transition-all duration-300 shadow-md shadow-black/20 text-xl font-bold hover:scale-102"
+          >
+            Accéder à mon espace
+            <ArrowRight
+              className="-me-1 ms-2 transition-transform md:group-hover:translate-x-0.5"
+              size={16}
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          </Button>
+        </Link>
       </div>
-      <div className="flex flex-1 items-center justify-center max-md:hidden md:justify-end">
+      <div className="size-96 flex items-center justify-center transition-all duration-300">
         <img
-          src="/images/Nexus.png"
+          src={isHovered ? "/images/NexusClin.png" : "/images/Nexus.png"}
           alt="Landing Page"
-          className="max-w-3/4"
+          className="w-full h-full object-contain transition-all duration-300 hover:rotate-380 hover:scale-125"
           style={{
             filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.8))",
           }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         />
       </div>
     </div>
