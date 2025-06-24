@@ -123,3 +123,19 @@
     background-color: #0f58d8;
   }
 }
+
+@keyframes balance {
+  0% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(-8deg);
+  }
+}
+
+.animate-balance {
+  animation: balance 2s ease-in-out infinite;
+}

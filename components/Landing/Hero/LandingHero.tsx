@@ -52,7 +52,7 @@ export default function LandingHero() {
         <img
           src={isHovered ? "/images/NexusClin.png" : "/images/Nexus.png"}
           alt="Landing Page"
-          className="w-full h-full object-contain transition-all duration-300 hover:rotate-380 hover:scale-125"
+          className="w-full h-full object-contain transition-all duration-300 hover:scale-125 hover:rotate-360 animate-balance"
           style={{
             filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.8))",
           }}
