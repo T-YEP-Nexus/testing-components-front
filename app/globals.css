@@ -139,3 +139,16 @@
 .animate-balance {
   animation: balance 2s ease-in-out infinite;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply w-full p-2 border border-gray-300 rounded-md text-sm text-gray-800 placeholder-gray-600;
+}
+
+
+.button {
+  @apply w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700;
+}
