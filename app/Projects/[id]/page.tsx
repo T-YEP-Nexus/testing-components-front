@@ -13,100 +13,49 @@ import {
 } from "lucide-react";
 import { Russo_One } from "next/font/google";
 import Link from "next/link";
+import { getProjectById } from "@/lib/projectsData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMedal } from "@fortawesome/free-solid-svg-icons";
 
 const font = Russo_One({
   subsets: ["latin"],
   weight: ["400"],
 });
 
-// Données des projets (à déplacer dans un fichier séparé plus tard)
-const projects = [
-  {
-    id: 1,
-    name: "Projet Alpha",
-    progress: 85,
-    description:
-      "Développement d'une application web moderne avec React et Node.js",
-    longDescription:
-      "Ce projet ambitieux vise à créer une plateforme web complète utilisant les technologies les plus récentes. L'application permettra aux utilisateurs de gérer leurs projets, collaborer en temps réel et suivre leurs objectifs avec des outils avancés d'analytics et de reporting.",
-    details: {
-      startDate: "15 Janvier 2024",
-      endDate: "30 Mars 2024",
-      team: "5 développeurs",
-    },
-    deadline: {
-      kickOff: "20 Janvier 2024",
-      followUp: "15 Février 2024",
-      keynote: "25 Mars 2024",
-      daysRemaining: 12,
-    },
-    documentation: {
-      pdfUrl: "/docs/projet-alpha.pdf",
-      pdfName: "Spécifications Alpha",
-    },
-    tasks: [
-      "Interface utilisateur terminée",
-      "API backend en cours",
-      "Tests unitaires à faire",
-      "Documentation à compléter",
-    ],
-    team: [
-      { name: "Marie Dubois", role: "Lead Developer", avatar: "👩‍💻" },
-      { name: "Thomas Martin", role: "Frontend Developer", avatar: "👨‍💻" },
-      { name: "Sophie Bernard", role: "Backend Developer", avatar: "👩‍💻" },
-      { name: "Lucas Petit", role: "UI/UX Designer", avatar: "👨‍🎨" },
-      { name: "Emma Roux", role: "QA Engineer", avatar: "👩‍🔬" },
-    ],
-    milestones: [
-      {
-        name: "Phase 1 - Conception",
-        date: "20 Janvier 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Développement Frontend",
-        date: "15 Février 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 3 - Développement Backend",
-        date: "10 Mars 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 4 - Tests et Optimisation",
-        date: "20 Mars 2024",
-        status: "pending",
-      },
-      {
-        name: "Phase 5 - Déploiement",
-        date: "25 Mars 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Intégration avec les APIs tierces",
-        mitigation: "Tests approfondis et documentation API",
-      },
-      {
-        level: "Faible",
-        description: "Performance sur mobile",
-        mitigation: "Optimisation progressive et tests sur appareils",
-      },
-    ],
-    budget: {
-      allocated: 45000,
-      spent: 38250,
-      remaining: 6750,
-    },
-  },
-  // Ajouter les autres projets ici...
-];
+export default function ProjectDetails({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = React.use(params);
+  const project = getProjectById(
+    parseInt(resolvedParams.id)
+  ) as typeof import("@/lib/projectsData").projects[number] & {
+    hotTopics?: { title: string; description: string }[];
+    skills?: string[];
+    resources?: {
+      bootstrap: { name: string; action: string; url: string }[];
+      kickOff: { name: string; action: string; url: string }[];
+      projet: { name: string; action: string; url: string }[];
+    };
+  };
 
-export default function ProjectDetails({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === parseInt(params.id));
+  // État local pour les tâches
+  const [tasks, setTasks] = React.useState<string[]>([]);
+  const [newTask, setNewTask] = React.useState("");
+
+  // Fonction pour ajouter une tâche
+  const addTask = () => {
+    if (newTask.trim()) {
+      setTasks([...tasks, newTask.trim()]);
+      setNewTask("");
+    }
+  };
+
+  // Fonction pour supprimer une tâche
+  const removeTask = (index: number) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+  };
 
   if (!project) {
     return (
@@ -199,90 +148,266 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
           <div className="lg:col-span-2 space-y-8">
             {/* Description détaillée */}
             <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                Description du projet
+              <h2 className="text-2xl font-bold text-blue-800 mb-4 flex items-center gap-3">
+                <FileText className="w-8 h-8 text-blue-400" />
+                <span>Description du projet</span>
               </h2>
               <p className="text-gray-600 leading-relaxed">
                 {project.longDescription}
               </p>
             </div>
 
-            {/* Tâches */}
+            {/* Documentation - déplacé et agrandi */}
             <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                Tâches en cours
+              <h2 className="text-2xl font-bold text-blue-800 mb-6 flex items-center gap-3">
+                <FileText className="w-6 h-6 text-blue-400" />
+                <span>Ressources</span>
               </h2>
-              <div className="space-y-4">
-                {project.tasks.map((task, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg"
-                  >
-                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                    <span className="text-gray-700">{task}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Jalons */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                Jalons du projet
-              </h2>
               <div className="space-y-4">
-                {project.milestones.map((milestone, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
-                  >
-                    {getStatusIcon(milestone.status)}
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-gray-800">
-                        {milestone.name}
-                      </h3>
-                      <p className="text-gray-600 text-sm">{milestone.date}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Risques */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                Risques identifiés
-              </h2>
-              <div className="space-y-4">
-                {project.risks.map((risk, index) => (
-                  <div
-                    key={index}
-                    className="p-4 border-l-4 border-yellow-400 bg-yellow-50 rounded-lg"
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <AlertCircle className="w-5 h-5 text-yellow-500" />
-                      <span
-                        className={`font-semibold ${getRiskColor(risk.level)}`}
+                {/* Section Bootstrap */}
+                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="text-base font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                    <span>Bootstrap</span>
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {project.resources?.bootstrap.map((resource, index) => (
+                      <div
+                        key={index}
+                        className="p-3 bg-white rounded border border-gray-200 hover:border-blue-300 transition-colors"
                       >
-                        Risque {risk.level}
-                      </span>
-                    </div>
-                    <p className="text-gray-700 mb-2">{risk.description}</p>
-                    <p className="text-gray-600 text-sm">
-                      <strong>Atténuation :</strong> {risk.mitigation}
-                    </p>
+                        <p className="font-medium text-gray-800 mb-2 text-sm">
+                          {resource.name}
+                        </p>
+                        <button
+                          className={`w-full px-3 py-1.5 text-white rounded text-xs font-medium transition-colors ${
+                            resource.action === "Télécharger"
+                              ? "bg-green-500 hover:bg-green-600"
+                              : "bg-blue-500 hover:bg-blue-600"
+                          }`}
+                        >
+                          {resource.action}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Section Kick Off */}
+                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="text-base font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                    <span>Kick Off</span>
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {project.resources?.kickOff.map((resource, index) => (
+                      <div
+                        key={index}
+                        className="p-3 bg-white rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                      >
+                        <p className="font-medium text-gray-800 mb-2 text-sm">
+                          {resource.name}
+                        </p>
+                        <button
+                          className={`w-full px-3 py-1.5 text-white rounded text-xs font-medium transition-colors ${
+                            resource.action === "Télécharger"
+                              ? "bg-green-500 hover:bg-green-600"
+                              : "bg-blue-500 hover:bg-blue-600"
+                          }`}
+                        >
+                          {resource.action}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Section Projet */}
+                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="text-base font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                    <span>Projet</span>
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {project.resources?.projet.map((resource, index) => (
+                      <div
+                        key={index}
+                        className="p-3 bg-white rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                      >
+                        <p className="font-medium text-gray-800 mb-2 text-sm">
+                          {resource.name}
+                        </p>
+                        <button
+                          className={`w-full px-3 py-1.5 text-white rounded text-xs font-medium transition-colors ${
+                            resource.action === "Télécharger"
+                              ? "bg-green-500 hover:bg-green-600"
+                              : "bg-blue-500 hover:bg-blue-600"
+                          }`}
+                        >
+                          {resource.action}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Trophées */}
+            <div className="bg-white rounded-2xl p-8 shadow-xl">
+              <h2 className="text-2xl font-bold text-blue-800 mb-6 flex items-center gap-3">
+                <FontAwesomeIcon
+                  icon={faMedal}
+                  className="w-8 h-8 text-blue-400"
+                />
+                <span>Médailles du projet</span>
+                <span className="text-base font-normal text-gray-500">
+                  {project.trophies.filter((t) => t.obtained).length}/
+                  {project.trophies.length}
+                </span>
+              </h2>
+              <div className="grid grid-cols-6 gap-6">
+                {project.trophies.map((trophy, idx) => (
+                  <div
+                    key={trophy.name}
+                    className="flex flex-col items-center group relative"
+                  >
+                    <FontAwesomeIcon
+                      icon={faMedal}
+                      size="2x"
+                      className={
+                        trophy.obtained
+                          ? "text-yellow-400"
+                          : "text-gray-300 opacity-40"
+                      }
+                    />
+                    {/* Tooltip */}
+                    <span className="absolute z-10 bottom-12 left-1/2 -translate-x-1/2 px-3 py-2 rounded bg-gray-900 text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">
+                      {trophy.description}
+                    </span>
+                    <span className="text-xs text-gray-700 mt-2 text-center break-words">
+                      {trophy.name}
+                    </span>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Hot Topics & Compétences (ex-Risques) */}
+            <div className="bg-white rounded-2xl p-8 shadow-xl">
+              <h2 className="text-2xl font-bold text-blue-800 mb-6 flex items-center gap-3">
+                <AlertCircle className="w-8 h-8 text-blue-400" />
+                <span>Hot Topics & Compétences mobilisées</span>
+              </h2>
+              <div className="space-y-4">
+                {/* Hot Topics */}
+                {project.hotTopics && project.hotTopics.length > 0 && (
+                  <div className="mb-4">
+                    <h3 className="font-semibold text-blue-700 mb-2">
+                      Hot Topics
+                    </h3>
+                    {project.hotTopics.map(
+                      (
+                        topic: { title: string; description: string },
+                        idx: number
+                      ) => (
+                        <div
+                          key={idx}
+                          className="p-4 border-l-4 border-yellow-400 bg-yellow-50 rounded-lg mb-2"
+                        >
+                          <div className="flex items-center gap-2 mb-1">
+                            <AlertCircle className="w-5 h-5 text-yellow-500" />
+                            <span className="font-semibold text-yellow-700">
+                              {topic.title}
+                            </span>
+                          </div>
+                          <p className="text-gray-700 text-sm">
+                            {topic.description}
+                          </p>
+                        </div>
+                      )
+                    )}
+                  </div>
+                )}
+                {/* Compétences */}
+                {project.skills && project.skills.length > 0 && (
+                  <div>
+                    <h3 className="font-semibold text-blue-700 mb-2">
+                      Compétences impliquées
+                    </h3>
+                    <ul className="flex flex-wrap gap-2">
+                      {project.skills.map((skill: string, idx: number) => (
+                        <li
+                          key={idx}
+                          className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"
+                        >
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
           {/* Sidebar */}
           <div className="space-y-8">
+            {/* Bloc Tâches & Jalons éditable */}
+            <div className="bg-white rounded-2xl p-6 shadow-xl">
+              <h3 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-3">
+                <CheckCircle className="w-6 h-6 text-blue-400" />
+                <span>Tâches</span>
+              </h3>
+              <div className="space-y-4">
+                {/* Zone de saisie */}
+                <div>
+                  <input
+                    type="text"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent"
+                    placeholder="Tapez une tâche et appuyez sur Entrée..."
+                    value={newTask}
+                    onChange={(e) => setNewTask(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && e.currentTarget.value.trim()) {
+                        addTask();
+                      }
+                    }}
+                  />
+                </div>
+
+                {/* Liste des tâches */}
+                <div className="space-y-2">
+                  {tasks.length === 0 ? (
+                    <p className="text-gray-500 text-sm italic">
+                      Aucune tâche pour le moment
+                    </p>
+                  ) : (
+                    tasks.map((task, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-3 p-2 bg-gray-50 rounded hover:bg-gray-100 transition-colors"
+                      >
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700 text-sm flex-1">
+                          {task}
+                        </span>
+                        <button
+                          onClick={() => removeTask(index)}
+                          className="text-red-400 hover:text-red-600 text-xs transition-colors"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+
             {/* Informations générales */}
             <div className="bg-white rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">
-                Informations générales
+              <h3 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-3">
+                <Users className="w-6 h-6 text-blue-400" />
+                <span>Informations générales</span>
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -317,7 +442,10 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
 
             {/* Deadline */}
             <div className="bg-white rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Deadline</h3>
+              <h3 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-3">
+                <Clock className="w-6 h-6 text-blue-400" />
+                <span>Deadline</span>
+              </h3>
               <div className="space-y-3">
                 <div>
                   <p className="text-sm text-gray-500">Kick off</p>
@@ -348,7 +476,10 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
 
             {/* Équipe */}
             <div className="bg-white rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Équipe</h3>
+              <h3 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-3">
+                <Users className="w-6 h-6 text-blue-400" />
+                <span>Équipe</span>
+              </h3>
               <div className="space-y-3">
                 {project.team.map((member, index) => (
                   <div key={index} className="flex items-center gap-3">
@@ -363,59 +494,6 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
                     </div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Documentation */}
-            <div className="bg-white rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">
-                Documentation
-              </h3>
-              <div className="p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                <div className="flex items-center gap-3">
-                  <FileText className="w-6 h-6 text-gray-400" />
-                  <div>
-                    <p className="font-semibold text-gray-800">
-                      {project.documentation.pdfName}
-                    </p>
-                    <p className="text-sm text-gray-500">Documentation PDF</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Budget */}
-            <div className="bg-white rounded-2xl p-6 shadow-xl">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Budget</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Alloué</span>
-                  <span className="font-semibold">
-                    {project.budget.allocated.toLocaleString()}€
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Dépensé</span>
-                  <span className="font-semibold text-orange-600">
-                    {project.budget.spent.toLocaleString()}€
-                  </span>
-                </div>
-                <div className="flex justify-between pt-2 border-t">
-                  <span className="text-gray-600">Restant</span>
-                  <span className="font-semibold text-green-600">
-                    {project.budget.remaining.toLocaleString()}€
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-                  <div
-                    className="bg-green-500 h-2 rounded-full"
-                    style={{
-                      width: `${
-                        (project.budget.spent / project.budget.allocated) * 100
-                      }%`,
-                    }}
-                  ></div>
-                </div>
               </div>
             </div>
           </div>
