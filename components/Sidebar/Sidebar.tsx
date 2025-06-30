@@ -17,7 +17,7 @@ import {
 import { Russo_One } from "next/font/google";
 
 const links = [
-  { label: "Accueil", icon: <Home size={24} />, href: "/" },
+  { label: "Accueil", icon: <Home size={24} />, href: "/dashboard" },
   { label: "Calendrier", icon: <Calendar size={24} />, href: "/calendrier" },
   { label: "Projets", icon: <Briefcase size={24} />, href: "/Projects" },
   { label: "Documents", icon: <Folder size={24} />, href: "/documents" },
@@ -79,7 +79,7 @@ const Sidebar = () => {
       {/* Utilisateur */}
       <div className="flex flex-col items-center md:flex-row md:items-center gap-2 mt-8">
         <Image
-          src="/images/avatar.png"
+          src="/images/Avatar.png"
           alt="Avatar"
           width={40}
           height={40}
