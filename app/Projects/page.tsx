@@ -557,6 +557,7 @@ export default function Page() {
         {displayedProjects.map((project) => (
           <Cards
             key={project.id}
+            projectId={project.id}
             projectName={project.name}
             progress={project.progress}
             description={project.description}

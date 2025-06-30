@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
+import Link from "next/link";
 
 interface CardsProps {
   projectName: string;
@@ -23,6 +26,7 @@ interface CardsProps {
   isExpanded?: boolean;
   onToggle?: () => void;
   isBlurred?: boolean;
+  projectId?: number; // Ajout de l'ID du projet pour la navigation
 }
 
 function Cards({
@@ -36,6 +40,7 @@ function Cards({
   isExpanded = false,
   onToggle,
   isBlurred = false,
+  projectId,
 }: CardsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -204,12 +209,16 @@ function Cards({
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-3">Actions</h4>
                   <div className="space-y-2">
-                    <button className="w-full px-4 py-3 bg-[#0E58D8] text-white rounded-lg lg:hover:bg-[#0E58D8]/80 transition-colors text-sm">
-                      Voir les détails
-                    </button>
-                    <button className="w-full px-4 py-3 bg-green-600 text-white rounded-lg lg:hover:bg-green-700 transition-colors text-sm">
-                      Mon équipe
-                    </button>
+                    <Link href={`/projects/${projectId}`}>
+                      <button className="w-full px-4 py-2 bg-[#0E58D8] text-white rounded-lg lg:hover:bg-[#0E58D8]/80 transition-colors text-sm cursor-pointer">
+                        Voir les détails
+                      </button>
+                    </Link>
+                    <Link href={`/projects/${projectId}/team`}>
+                      <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg lg:hover:bg-green-700 transition-colors text-sm cursor-pointer">
+                        Mon équipe
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -339,13 +348,17 @@ function Cards({
 
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-3">Actions</h4>
-                  <div className="space-y-2">
-                    <button className="w-full px-4 py-2 bg-[#0E58D8] text-white rounded-lg lg:hover:bg-[#0E58D8]/80 transition-colors text-sm cursor-pointer">
-                      Voir les détails
-                    </button>
-                    <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg lg:hover:bg-green-700 transition-colors text-sm cursor-pointer">
-                      Mon équipe
-                    </button>
+                  <div className="flex flex-col gap-4">
+                    <Link href={`/projects/${projectId}`}>
+                      <button className="w-full px-4 py-2 bg-[#0E58D8] text-white rounded-lg lg:hover:bg-[#0E58D8]/80 transition-colors text-sm cursor-pointer">
+                        Voir les détails
+                      </button>
+                    </Link>
+                    <Link href={`/projects/${projectId}/team`}>
+                      <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg lg:hover:bg-green-700 transition-colors text-sm cursor-pointer mt-2">
+                        Mon équipe
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
