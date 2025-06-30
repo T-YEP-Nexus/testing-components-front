@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useState } from "react";
 
-const NexusAnimated: React.FC = () => {
+const NexusAnimated: React.FC<{ className?: string }> = ({ className }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const isDesktop = () =>
@@ -19,7 +21,7 @@ const NexusAnimated: React.FC = () => {
     <img
       src={isHovered ? "/images/NexusClin.png" : "/images/Nexus.png"}
       alt="Logo Nexus animé"
-      className="max-md:size-3/4 size-full object-contain animate-balance transition-transform duration-300 lg:hover:rotate-360 lg:hover:scale-125"
+      className={`max-md:size-3/4 size-full object-contain animate-balance transition-transform duration-300 lg:hover:rotate-360 lg:hover:scale-125 ${className}`}
       style={{
         filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.8))",
       }}

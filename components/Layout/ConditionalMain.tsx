@@ -10,11 +10,15 @@ interface ConditionalMainProps {
 const ConditionalMain = ({ children }: ConditionalMainProps) => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const isLoginPage = pathname === "/login";
+  const isForgotPasswordPage = pathname === "/forgot-password";
 
   return (
     <main
       className={`min-h-screen overflow-y-auto transition-all duration-300 ${
-        isHomePage ? "" : "ml-20 md:ml-64"
+        isHomePage || isLoginPage || isForgotPasswordPage
+          ? ""
+          : "ml-20 md:ml-64"
       }`}
     >
       {children}

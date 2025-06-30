@@ -6,11 +6,15 @@ import { usePathname } from "next/navigation";
 function BackgroundBubbles() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const isLoginPage = pathname === "/login";
+  const isForgotPasswordPage = pathname === "/forgot-password";
 
   return (
     <div
       className={`absolute inset-0 overflow-hidden pointer-events-none -z-10 ${
-        !isHomePage ? "md:left-20 lg:left-64" : ""
+        !isHomePage && !isLoginPage && !isForgotPasswordPage
+          ? "md:left-20 lg:left-64"
+          : ""
       }`}
     >
       {/* Bulle 1 - Animation lente */}

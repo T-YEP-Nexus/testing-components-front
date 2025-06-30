@@ -7,8 +7,10 @@ import Sidebar from "./Sidebar";
 const ConditionalSidebar = () => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const isLoginPage = pathname === "/login";
+  const isForgotPasswordPage = pathname === "/forgot-password";
 
-  if (isHomePage) {
+  if (isHomePage || isLoginPage || isForgotPasswordPage) {
     return null;
   }
 
