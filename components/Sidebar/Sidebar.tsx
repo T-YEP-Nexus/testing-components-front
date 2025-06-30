@@ -18,7 +18,7 @@ import { Russo_One } from "next/font/google";
 
 const links = [
   { label: "Accueil", icon: <Home size={24} />, href: "/" },
-  { label: "Calendrier", icon: <Calendar size={24} />, href: "/calendrier" },
+  { label: "Calendrier", icon: <Calendar size={24} />, href: "/calendar" },
   { label: "Projets", icon: <Briefcase size={24} />, href: "/Projects" },
   { label: "Documents", icon: <Folder size={24} />, href: "/documents" },
   {
