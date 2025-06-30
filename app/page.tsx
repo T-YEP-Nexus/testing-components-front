@@ -14,23 +14,23 @@ const cards = [
     title: "Calendrier Intelligent",
     description:
       "Un seul outil pour tes projets, tes cours, tes rendus et bien plus encore.",
-    image: "/images/calendar.png",
+    image: "/images/Calendar.png",
   },
   {
     title: "Compétences en temps réel",
     description: "Suis l’évolution de tes compétences en temps réel",
-    image: "/images/compétences.png",
+    image: "/images/Compétences.png",
   },
   {
     title: "Accès unifié aux platformes",
     description:
       "Centralise l’accès à toutes les plateformes utilisées pendant la formation",
-    image: "/images/accès.png",
+    image: "/images/Accès.png",
   },
   {
     title: "Suivis de projets",
     description: "Gère et visualise l’avancement de tes projets étudiants",
-    image: "/images/suivi.png",
+    image: "/images/Suivi.png",
   },
 ];
 
