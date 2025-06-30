@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BackgroundBubbles from "@/components/Background/BackgroundBubbles";
-import Sidebar from "@/components/Sidebar/Sidebar";
+import ConditionalSidebar from "@/components/Sidebar/ConditionalSidebar";
+import ConditionalMain from "@/components/Layout/ConditionalMain";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,10 +31,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
         <BackgroundBubbles />
-        <Sidebar />
-        <main className="ml-20 md:ml-64 min-h-screen overflow-y-auto transition-all duration-300">
-          {children}
-        </main>
+        <ConditionalSidebar />
+        <ConditionalMain>{children}</ConditionalMain>
       </body>
     </html>
   );

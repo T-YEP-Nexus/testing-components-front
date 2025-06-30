@@ -1,10 +1,18 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 
 function BackgroundBubbles() {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+    <div
+      className={`absolute inset-0 overflow-hidden pointer-events-none -z-10 ${
+        !isHomePage ? "md:left-20 lg:left-64" : ""
+      }`}
+    >
       {/* Bulle 1 - Animation lente */}
       <div
         className="absolute w-24 h-24 bg-white/10 rounded-full animate-bubble-1"
