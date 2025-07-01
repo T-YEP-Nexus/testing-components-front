@@ -59,7 +59,7 @@ export default function ProjectDetails({
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0E58D8] to-[#0E58D8]/80 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center text-white">
           <h1 className="text-2xl font-bold mb-4">Projet non trouvé</h1>
           <Link
@@ -100,7 +100,7 @@ export default function ProjectDetails({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0E58D8] to-[#0E58D8]/80">
+    <div className="min-h-screen">
       {/* Header */}
       <div className="px-4 sm:px-8 lg:px-16 py-6">
         <div className="flex items-center gap-4 mb-8">

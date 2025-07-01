@@ -68,7 +68,7 @@ export default function Page() {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen px-4 sm:px-8 lg:px-16 py-4 sm:py-6 lg:py-8 bg-gradient-to-b from-[#0E58D8] to-[#0E58D8]/80">
+    <div className="min-h-screen px-4 sm:px-8 lg:px-16 py-4 sm:py-6 lg:py-8">
       {/* Header */}
       <div className="flex justify-between items-center mb-8 sm:mb-12">
         <div>
