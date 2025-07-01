@@ -125,6 +125,7 @@ export default function Page() {
             deadline={project.deadline}
             documentation={project.documentation}
             tasks={project.tasks}
+            trophies={project.trophies}
             isExpanded={expandedCard === project.id}
             onToggle={() => handleCardToggle(project.id)}
             isBlurred={expandedCard !== null && expandedCard !== project.id}

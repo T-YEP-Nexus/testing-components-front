@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMedal } from "@fortawesome/free-solid-svg-icons";
 
 interface CardsProps {
   projectName: string;
@@ -23,6 +25,7 @@ interface CardsProps {
     pdfUrl?: string;
     pdfName: string;
   };
+  trophies?: { name: string; obtained: boolean; description: string }[];
   isExpanded?: boolean;
   onToggle?: () => void;
   isBlurred?: boolean;
@@ -37,12 +40,14 @@ function Cards({
   tasks,
   deadline,
   documentation,
+  trophies = [],
   isExpanded = false,
   onToggle,
   isBlurred = false,
   projectId,
 }: CardsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hoveredTrophy, setHoveredTrophy] = useState<number | null>(null);
 
   // S'assurer que la progression est entre 0 et 100
   const clampedProgress = Math.min(Math.max(progress, 0), 100);
@@ -209,12 +214,12 @@ function Cards({
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-3">Actions</h4>
                   <div className="space-y-2">
-                    <Link href={`/projects/${projectId}`}>
+                    <Link href={`/projects/${projectId}/details`}>
                       <button className="w-full px-4 py-2 bg-[#0E58D8] text-white rounded-lg lg:hover:bg-[#0E58D8]/80 transition-colors text-sm cursor-pointer">
                         Voir les détails
                       </button>
                     </Link>
-                    <Link href={`/projects/${projectId}/team`}>
+                    <Link href={`/projects/${projectId}/teamBuilder`}>
                       <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg lg:hover:bg-green-700 transition-colors text-sm cursor-pointer">
                         Mon équipe
                       </button>
@@ -346,15 +351,68 @@ function Cards({
                   </div>
                 </div>
 
+                {/* Aperçu des médailles */}
+                {trophies.length > 0 && (
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-3">
+                      Médailles du projet
+                    </h4>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-gray-700">
+                          Progression des trophées
+                        </span>
+                        <span className="text-sm font-bold text-gray-800">
+                          {trophies.filter((t) => t.obtained).length}/
+                          {trophies.length}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-6 gap-2">
+                        {trophies.slice(0, 12).map((trophy, index) => (
+                          <div
+                            key={index}
+                            className="flex flex-col items-center"
+                          >
+                            <div className="relative">
+                              <FontAwesomeIcon
+                                icon={faMedal}
+                                size="lg"
+                                className={`${
+                                  trophy.obtained
+                                    ? "text-yellow-400"
+                                    : "text-gray-300 opacity-40"
+                                }`}
+                                onMouseEnter={() => setHoveredTrophy(index)}
+                                onMouseLeave={() => setHoveredTrophy(null)}
+                              />
+                              {/* Tooltip */}
+                              {hoveredTrophy === index && (
+                                <span className="absolute z-10 bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded bg-gray-900 text-white text-xs pointer-events-none whitespace-nowrap shadow-lg">
+                                  {trophy.description}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      {trophies.length > 12 && (
+                        <p className="text-xs text-gray-500 text-center">
+                          +{trophies.length - 12} autres trophées
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-3">Actions</h4>
                   <div className="flex flex-col gap-2">
-                    <Link href={`/projects/${projectId}`}>
+                    <Link href={`/projects/${projectId}/details`}>
                       <button className="w-full px-4 py-2 bg-[#0E58D8] text-white rounded-lg lg:hover:bg-[#0E58D8]/80 transition-colors text-sm cursor-pointer">
                         Voir les détails
                       </button>
                     </Link>
-                    <Link href={`/projects/${projectId}/team`}>
+                    <Link href={`/projects/${projectId}/teamBuilder`}>
                       <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg lg:hover:bg-green-700 transition-colors text-sm cursor-pointer">
                         Mon équipe
                       </button>
@@ -377,7 +435,7 @@ function Cards({
       }`}
     >
       <div
-        className="bg-white rounded-2xl p-8 w-full h-76 shadow-sm lg:hover:shadow-xl cursor-pointer lg:hover:scale-105 transition-all duration-300 ease-out border border-gray-100 lg:hover:border-[#0E58D8]/30"
+        className="bg-white rounded-2xl p-8 w-full h-76 shadow-sm lg:hover:shadow-xl cursor-pointer lg:hover:scale-105 transition-all duration-300 ease-out border border-gray-100 lg:hover:border-[#0E58D8]/30 relative"
         onClick={handleCardClick}
       >
         <div className="flex flex-col h-full">

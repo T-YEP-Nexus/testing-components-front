@@ -36,45 +36,6 @@ export const projects = [
       { name: "Lucas Petit", role: "UI/UX Designer", avatar: "👨‍🎨" },
       { name: "Emma Roux", role: "QA Engineer", avatar: "👩‍🔬" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Conception",
-        date: "20 Janvier 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Développement Frontend",
-        date: "15 Février 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 3 - Développement Backend",
-        date: "10 Mars 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 4 - Tests et Optimisation",
-        date: "20 Mars 2024",
-        status: "pending",
-      },
-      {
-        name: "Phase 5 - Déploiement",
-        date: "25 Mars 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Intégration avec les APIs tierces",
-        mitigation: "Tests approfondis et documentation API",
-      },
-      {
-        level: "Faible",
-        description: "Performance sur mobile",
-        mitigation: "Optimisation progressive et tests sur appareils",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -114,8 +75,6 @@ export const projects = [
     resources: {
       bootstrap: [
         { name: "Guide de démarrage", action: "Voir", url: "/docs/bootstrap/guide-demarrage.pdf" },
-        { name: "Architecture", action: "Voir", url: "/docs/bootstrap/architecture.pdf" },
-        { name: "Configuration", action: "Télécharger", url: "/docs/bootstrap/config.zip" }
       ],
       kickOff: [
         { name: "Présentation projet", action: "Voir", url: "/docs/kickoff/presentation.pdf" },
@@ -123,11 +82,15 @@ export const projects = [
         { name: "Équipe", action: "Voir", url: "/docs/kickoff/equipe.pdf" }
       ],
       projet: [
-        { name: "Spécifications Alpha", action: "Voir", url: "/docs/projet-alpha.pdf" },
         { name: "API Documentation", action: "Voir", url: "/docs/api-docs.pdf" },
         { name: "Guide utilisateur", action: "Télécharger", url: "/docs/guide-utilisateur.pdf" }
       ]
     },
+    teams: [
+      { id: 1, name: 'MAR_5', members: [{ name: 'William LACROIX', avatar: '👤' }], maxMembers: 3 },
+      { id: 2, name: 'MAR_1', members: [{ name: 'Paul LOUIS', avatar: '👤' }], maxMembers: 3 },
+      { id: 3, name: 'MAR_10', members: [{ name: 'Philippe LEFEVRE', avatar: '👤' }], maxMembers: 3 },
+    ],
   },
   {
     id: 2,
@@ -162,30 +125,6 @@ export const projects = [
       { name: "Alexandre Moreau", role: "UI/UX Designer", avatar: "👨‍🎨" },
       { name: "Julie Leroy", role: "Frontend Developer", avatar: "👩‍💻" },
       { name: "Pierre Durand", role: "Accessibility Expert", avatar: "👨‍🔬" },
-    ],
-    milestones: [
-      {
-        name: "Phase 1 - Design System",
-        date: "25 Janvier 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Composants UI",
-        date: "20 Février 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Tests et Optimisation",
-        date: "5 Avril 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Faible",
-        description: "Compatibilité navigateurs",
-        mitigation: "Tests sur tous les navigateurs majeurs",
-      },
     ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
@@ -239,6 +178,11 @@ export const projects = [
         { name: "Guide utilisateur", action: "Télécharger", url: "/docs/guide-utilisateur.pdf" }
       ]
     },
+    teams: [
+      { id: 1, name: 'BETA_1', members: [{ name: 'Alexandre Moreau', avatar: '👨‍🎨' }], maxMembers: 3 },
+      { id: 2, name: 'BETA_2', members: [{ name: 'Julie Leroy', avatar: '👩‍💻' }], maxMembers: 3 },
+      { id: 3, name: 'BETA_3', members: [], maxMembers: 3 },
+    ],
   },
   {
     id: 3,
@@ -274,30 +218,6 @@ export const projects = [
       { name: "Antoine Lefevre", role: "Backend Developer", avatar: "👨‍💻" },
       { name: "Sarah Dubois", role: "DevOps Engineer", avatar: "👩‍💻" },
       { name: "Maxime Bernard", role: "QA Engineer", avatar: "👨‍🔬" },
-    ],
-    milestones: [
-      {
-        name: "Phase 1 - Analyse Performance",
-        date: "15 Janvier 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Optimisation",
-        date: "10 Février 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 3 - Tests et Déploiement",
-        date: "20 Février 2024",
-        status: "in-progress",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Régression de fonctionnalités",
-        mitigation: "Tests automatisés complets",
-      },
     ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
@@ -373,30 +293,6 @@ export const projects = [
       { name: "Thomas Leroy", role: "Integration Specialist", avatar: "👨‍💻" },
       { name: "Emma Dubois", role: "QA Engineer", avatar: "👩‍🔬" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Architecture",
-        date: "30 Janvier 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Premier Microservice",
-        date: "25 Février 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Intégration APIs",
-        date: "15 Mai 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Élevé",
-        description: "Dépendance APIs externes",
-        mitigation: "Contrats de service et fallbacks",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -471,30 +367,6 @@ export const projects = [
       { name: "Antoine Moreau", role: "Monitoring Engineer", avatar: "👨‍💻" },
       { name: "Sarah Garcia", role: "QA Engineer", avatar: "👩‍🔬" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Infrastructure Cloud",
-        date: "10 Février 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Sécurité",
-        date: "5 Mars 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Monitoring et Tests",
-        date: "15 Juin 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Migration de données",
-        mitigation: "Plan de rollback et tests complets",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -565,30 +437,6 @@ export const projects = [
       { name: "Thomas Martin", role: "Data Scientist", avatar: "👨‍💻" },
       { name: "Sophie Bernard", role: "AI Researcher", avatar: "👩‍💻" },
       { name: "Lucas Petit", role: "Backend Developer", avatar: "👨‍💻" },
-    ],
-    milestones: [
-      {
-        name: "Phase 1 - Collecte et Préparation Données",
-        date: "20 Février 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Développement Modèles",
-        date: "15 Mars 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 3 - Optimisation et Tests",
-        date: "5 Juillet 2024",
-        status: "in-progress",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Qualité des données",
-        mitigation: "Validation et nettoyage rigoureux",
-      },
     ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
@@ -663,30 +511,6 @@ export const projects = [
       { name: "Nicolas Simon", role: "DevOps Engineer", avatar: "👨‍💻" },
       { name: "Claire Dubois", role: "QA Engineer", avatar: "👩‍🔬" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Architecture Base de Données",
-        date: "5 Mars 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - API Temps Réel",
-        date: "1 Avril 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Interface et Tests",
-        date: "10 Août 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Latence réseau",
-        mitigation: "Optimisation et CDN",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -758,30 +582,6 @@ export const projects = [
       { name: "Julie Leroy", role: "Process Engineer", avatar: "👩‍💻" },
       { name: "Alexandre Moreau", role: "Automation Developer", avatar: "👨‍💻" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Analyse Processus",
-        date: "15 Mars 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Automatisation",
-        date: "10 Avril 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Formation et Tests",
-        date: "25 Septembre 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Faible",
-        description: "Résistance au changement",
-        mitigation: "Formation et accompagnement",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -852,30 +652,6 @@ export const projects = [
       { name: "Antoine Lefevre", role: "iOS Developer", avatar: "👨‍💻" },
       { name: "Sarah Dubois", role: "Android Developer", avatar: "👩‍💻" },
       { name: "Maxime Bernard", role: "QA Engineer", avatar: "👨‍🔬" },
-    ],
-    milestones: [
-      {
-        name: "Phase 1 - Architecture Cross-Platform",
-        date: "25 Février 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Développement iOS",
-        date: "20 Mars 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 3 - Développement Android",
-        date: "20 Mai 2024",
-        status: "in-progress",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Différences plateformes",
-        mitigation: "Tests approfondis sur chaque plateforme",
-      },
     ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
@@ -950,30 +726,6 @@ export const projects = [
       { name: "Thomas Leroy", role: "QA Engineer", avatar: "👨‍🔬" },
       { name: "Emma Dubois", role: "Security Analyst", avatar: "👩‍🔬" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Analyse et Conception",
-        date: "5 Avril 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 2 - Intégration Paiements",
-        date: "1 Mai 2024",
-        status: "pending",
-      },
-      {
-        name: "Phase 3 - Tests et Certification",
-        date: "25 Octobre 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Élevé",
-        description: "Conformité réglementaire",
-        mitigation: "Audit externe et expertise juridique",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -1046,30 +798,6 @@ export const projects = [
       { name: "Julie Rousseau", role: "Data Analyst", avatar: "👩‍💻" },
       { name: "Pierre Dubois", role: "UX Designer", avatar: "👨‍🎨" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Conception Dashboard",
-        date: "20 Mars 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Visualisations",
-        date: "15 Avril 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Tests et Optimisation",
-        date: "15 Juillet 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Faible",
-        description: "Performance des graphiques",
-        mitigation: "Optimisation et lazy loading",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -1141,30 +869,6 @@ export const projects = [
       { name: "Antoine Lefevre", role: "Backend Developer", avatar: "👨‍💻" },
       { name: "Sarah Dubois", role: "Technical Writer", avatar: "👩‍💻" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Architecture et Endpoints",
-        date: "30 Mars 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 2 - Documentation",
-        date: "25 Avril 2024",
-        status: "pending",
-      },
-      {
-        name: "Phase 3 - Tests et Déploiement",
-        date: "10 Août 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Faible",
-        description: "Évolution de l'API",
-        mitigation: "Versioning et rétrocompatibilité",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -1235,30 +939,6 @@ export const projects = [
       { name: "Maxime Bernard", role: "Backend Developer", avatar: "👨‍💻" },
       { name: "Laura Moreau", role: "UI/UX Designer", avatar: "👩‍🎨" },
       { name: "Nicolas Simon", role: "Content Strategist", avatar: "👨‍💻" },
-    ],
-    milestones: [
-      {
-        name: "Phase 1 - Éditeur WYSIWYG",
-        date: "10 Avril 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Gestion Médias",
-        date: "5 Mai 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Workflow et Tests",
-        date: "20 Septembre 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Complexité de l'éditeur",
-        mitigation: "Tests utilisateurs réguliers",
-      },
     ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
@@ -1332,30 +1012,6 @@ export const projects = [
       { name: "Pierre Dubois", role: "DevOps Engineer", avatar: "👨‍💻" },
       { name: "Camille Leroy", role: "QA Engineer", avatar: "👩‍🔬" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Infrastructure Temps Réel",
-        date: "15 Avril 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 2 - Fonctionnalités Collaboration",
-        date: "10 Mai 2024",
-        status: "pending",
-      },
-      {
-        name: "Phase 3 - Tests et Optimisation",
-        date: "25 Novembre 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Moyen",
-        description: "Scalabilité WebSocket",
-        mitigation: "Architecture distribuée et load balancing",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -1427,30 +1083,6 @@ export const projects = [
       { name: "Maxime Bernard", role: "Backend Developer", avatar: "👨‍💻" },
       { name: "Laura Moreau", role: "UI/UX Designer", avatar: "👩‍🎨" },
     ],
-    milestones: [
-      {
-        name: "Phase 1 - Gestion de Projet",
-        date: "20 Avril 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Diagrammes Gantt",
-        date: "15 Mai 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Notifications et Tests",
-        date: "15 Août 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Faible",
-        description: "Complexité des diagrammes",
-        mitigation: "Interface intuitive et documentation",
-      },
-    ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
       { name: "deploy-result", obtained: false, description: "Déployer le service result avec succès." },
@@ -1520,30 +1152,6 @@ export const projects = [
       { name: "Emma Roux", role: "Full-stack Developer", avatar: "👩‍💻" },
       { name: "Nicolas Simon", role: "Backend Developer", avatar: "👨‍💻" },
       { name: "Claire Dubois", role: "QA Engineer", avatar: "👩‍🔬" },
-    ],
-    milestones: [
-      {
-        name: "Phase 1 - Calendrier et Réservations",
-        date: "25 Avril 2024",
-        status: "completed",
-      },
-      {
-        name: "Phase 2 - Notifications",
-        date: "20 Mai 2024",
-        status: "in-progress",
-      },
-      {
-        name: "Phase 3 - Tests et Optimisation",
-        date: "10 Septembre 2024",
-        status: "pending",
-      },
-    ],
-    risks: [
-      {
-        level: "Faible",
-        description: "Gestion des conflits",
-        mitigation: "Validation en temps réel",
-      },
     ],
     trophies: [
       { name: "deploy-poll", obtained: true, description: "Déployer le service poll avec succès." },
