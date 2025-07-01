@@ -10,6 +10,8 @@ import {
   CheckCircle,
   Circle,
   AlertCircle,
+  Eye,
+  Download,
 } from "lucide-react";
 import { Russo_One } from "next/font/google";
 import Link from "next/link";
@@ -43,12 +45,22 @@ export default function ProjectDetails({
   // État local pour les tâches
   const [tasks, setTasks] = React.useState<string[]>([]);
   const [newTask, setNewTask] = React.useState("");
+  const tasksContainerRef = React.useRef<HTMLDivElement>(null);
 
   // Fonction pour ajouter une tâche
   const addTask = () => {
     if (newTask.trim()) {
       setTasks([...tasks, newTask.trim()]);
       setNewTask("");
+      // Scroll vers le bas après l'ajout
+      setTimeout(() => {
+        if (tasksContainerRef.current) {
+          tasksContainerRef.current.scrollTo({
+            top: tasksContainerRef.current.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
     }
   };
 
@@ -59,7 +71,7 @@ export default function ProjectDetails({
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#0E58D8] to-[#0E58D8]/80 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center text-white">
           <h1 className="text-2xl font-bold mb-4">Projet non trouvé</h1>
           <Link
@@ -100,7 +112,7 @@ export default function ProjectDetails({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0E58D8] to-[#0E58D8]/80">
+    <div className="min-h-screen">
       {/* Header */}
       <div className="px-4 sm:px-8 lg:px-16 py-6">
         <div className="flex items-center gap-4 mb-8">
@@ -165,85 +177,139 @@ export default function ProjectDetails({
               </h2>
 
               <div className="space-y-4">
-                {/* Section Bootstrap */}
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                  <h3 className="text-base font-semibold text-blue-700 mb-3 flex items-center gap-2">
-                    <span>Bootstrap</span>
+                {/* Section Kick Off */}
+                <div className="p-5 bg-white rounded-xl border border-dashed border-gray-200 shadow-sm mb-4">
+                  <h3 className="flex items-center gap-2 text-blue-700 font-semibold text-lg mb-4 py-1">
+                    <span className="inline-block">
+                      <FileText className="w-5 h-5 text-blue-400" />
+                    </span>
+                    Kick Off
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {project.resources?.bootstrap.map((resource, index) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {project.resources?.kickOff.map((resource, index) => (
                       <div
                         key={index}
-                        className="p-3 bg-white rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                        className="p-4 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 transition-colors flex flex-col items-start gap-2 shadow-sm"
                       >
-                        <p className="font-medium text-gray-800 mb-2 text-sm">
+                        <p className="font-medium text-gray-800 text-sm mb-1">
                           {resource.name}
                         </p>
-                        <button
-                          className={`w-full px-3 py-1.5 text-white rounded text-xs font-medium transition-colors ${
-                            resource.action === "Télécharger"
-                              ? "bg-green-500 hover:bg-green-600"
-                              : "bg-blue-500 hover:bg-blue-600"
-                          }`}
-                        >
-                          {resource.action}
-                        </button>
+                        <div className="flex gap-2 w-full">
+                          {["Voir", "view"].includes(resource.action) && (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 px-3 py-1.5 border border-blue-300 text-blue-600 hover:bg-blue-50 hover:border-blue-400 rounded-md text-xs font-medium transition-all duration-200 text-center"
+                            >
+                              Voir
+                            </a>
+                          )}
+                          {["Télécharger", "download"].includes(
+                            resource.action
+                          ) && (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 px-3 py-1.5 border border-green-300 text-green-600 hover:bg-green-50 hover:border-green-400 rounded-md text-xs font-medium transition-all duration-200 text-center"
+                            >
+                              Télécharger
+                            </a>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Section Kick Off */}
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                  <h3 className="text-base font-semibold text-blue-700 mb-3 flex items-center gap-2">
-                    <span>Kick Off</span>
+                {/* Section Bootstrap */}
+                <div className="p-5 bg-white rounded-xl border border-dashed border-gray-200 shadow-sm mb-4">
+                  <h3 className="flex items-center gap-2 text-blue-700 font-semibold text-lg mb-4 py-1">
+                    <span className="inline-block">
+                      <FileText className="w-5 h-5 text-blue-400" />
+                    </span>
+                    Bootstrap
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    {project.resources?.kickOff.map((resource, index) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {project.resources?.bootstrap.map((resource, index) => (
                       <div
                         key={index}
-                        className="p-3 bg-white rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                        className="p-4 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 transition-colors flex flex-col items-start gap-2 shadow-sm"
                       >
-                        <p className="font-medium text-gray-800 mb-2 text-sm">
+                        <p className="font-medium text-gray-800 text-sm mb-1">
                           {resource.name}
                         </p>
-                        <button
-                          className={`w-full px-3 py-1.5 text-white rounded text-xs font-medium transition-colors ${
-                            resource.action === "Télécharger"
-                              ? "bg-green-500 hover:bg-green-600"
-                              : "bg-blue-500 hover:bg-blue-600"
-                          }`}
-                        >
-                          {resource.action}
-                        </button>
+                        <div className="flex gap-2 w-full">
+                          {["Voir", "view"].includes(resource.action) && (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 px-3 py-1.5 border border-blue-300 text-blue-600 hover:bg-blue-50 hover:border-blue-400 rounded-md text-xs font-medium transition-all duration-200 text-center"
+                            >
+                              Voir
+                            </a>
+                          )}
+                          {["Télécharger", "download"].includes(
+                            resource.action
+                          ) && (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 px-3 py-1.5 border border-green-300 text-green-600 hover:bg-green-50 hover:border-green-400 rounded-md text-xs font-medium transition-all duration-200 text-center"
+                            >
+                              Télécharger
+                            </a>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Section Projet */}
-                <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
-                  <h3 className="text-base font-semibold text-blue-700 mb-3 flex items-center gap-2">
-                    <span>Projet</span>
+                <div className="p-5 bg-white rounded-xl border border-dashed border-gray-200 shadow-sm">
+                  <h3 className="flex items-center gap-2 text-blue-700 font-semibold text-lg mb-4 py-1">
+                    <span className="inline-block">
+                      <FileText className="w-5 h-5 text-blue-400" />
+                    </span>
+                    Projet
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {project.resources?.projet.map((resource, index) => (
                       <div
                         key={index}
-                        className="p-3 bg-white rounded border border-gray-200 hover:border-blue-300 transition-colors"
+                        className="p-4 bg-gray-50 rounded-lg border border-gray-100 hover:bg-gray-100 transition-colors flex flex-col items-start gap-2 shadow-sm"
                       >
-                        <p className="font-medium text-gray-800 mb-2 text-sm">
+                        <p className="font-medium text-gray-800 text-sm mb-1">
                           {resource.name}
                         </p>
-                        <button
-                          className={`w-full px-3 py-1.5 text-white rounded text-xs font-medium transition-colors ${
-                            resource.action === "Télécharger"
-                              ? "bg-green-500 hover:bg-green-600"
-                              : "bg-blue-500 hover:bg-blue-600"
-                          }`}
-                        >
-                          {resource.action}
-                        </button>
+                        <div className="flex gap-2 w-full">
+                          {["Voir", "view"].includes(resource.action) && (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 px-3 py-1.5 border border-blue-300 text-blue-600 hover:bg-blue-50 hover:border-blue-400 rounded-md text-xs font-medium transition-all duration-200 text-center"
+                            >
+                              Voir
+                            </a>
+                          )}
+                          {["Télécharger", "download"].includes(
+                            resource.action
+                          ) && (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 px-3 py-1.5 border border-green-300 text-green-600 hover:bg-green-50 hover:border-green-400 rounded-md text-xs font-medium transition-all duration-200 text-center"
+                            >
+                              Télécharger
+                            </a>
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -375,7 +441,10 @@ export default function ProjectDetails({
                 </div>
 
                 {/* Liste des tâches */}
-                <div className="space-y-2">
+                <div
+                  ref={tasksContainerRef}
+                  className="space-y-2 max-h-64 overflow-y-auto"
+                >
                   {tasks.length === 0 ? (
                     <p className="text-gray-500 text-sm italic">
                       Aucune tâche pour le moment
@@ -392,7 +461,7 @@ export default function ProjectDetails({
                         </span>
                         <button
                           onClick={() => removeTask(index)}
-                          className="text-red-400 hover:text-red-600 text-xs transition-colors"
+                          className="text-red-400 hover:text-red-600 text-sm font-bold w-6 h-6 rounded-full hover:bg-red-50 transition-all duration-200 cursor-pointer flex items-center justify-center"
                         >
                           ×
                         </button>
